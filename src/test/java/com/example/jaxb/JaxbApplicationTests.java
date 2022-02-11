@@ -3,12 +3,13 @@ package com.example.jaxb;
 import com.example.jaxb.model.AnyValue;
 import com.example.jaxb.model.TestEntry;
 import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.namespace.QName;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 class JaxbApplicationTests {
 
@@ -19,9 +20,11 @@ class JaxbApplicationTests {
         TestEntry employee = new TestEntry();
         employee.name = "Alex";
         
-        AnyValue values1 = new AnyValue();
-        values1.toto = "here we go";
-        employee.values = values1;
+        LinkedHashMap<String, String> properties = new LinkedHashMap<>();
+        properties.put("toto", "here we go");
+        properties.put("another", "here we go again");
+        
+        employee.values = properties;
         
         context.createMarshaller().marshal(employee, System.out);
     }
